@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: video-analysis
+  labels:
+    app: video-analysis
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: video-analysis
+    spec:
+      containers:
+      - name: video
+        image: gcr.io/modular-granite-265122/video:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-analysis
+  labels:
+    app: video-analysis
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: video-analysis

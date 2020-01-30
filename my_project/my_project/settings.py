@@ -25,7 +25,7 @@ SECRET_KEY = '*)w@2zu*^q2%xp9kh25l92)69ugrj_^ei8mrr2a1jsf(lkwbp+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','videoanalyser-dot-serato-big-query.appspot.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
