@@ -99,7 +99,7 @@ def execute_api_request(client_library_function, **kwargs):
 
 
 def analyze_labels_file(path):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "test_google_account.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "video_api.json"
     # [START video_analyze_labels]
     """Detect labels given a file path."""
     video_client = videointelligence.VideoIntelligenceServiceClient()
@@ -174,7 +174,7 @@ def analyze_videos(url):
         metrics="audienceWatchRatio,relativeRetentionPerformance",
         dimensions='elapsedVideoTimeRatio')
 
-    path = 'gs://[bucket_on_test_account]/' + split[1] + '.mp4'
+    path = 'gs://artifacts.modular-granite-265122.appspot.com/' + split[1] + '.mp4'
 
     # Calling the analyze labels function for the video analysis. Currently shot level analysis is being done.
     frame_shot = analyze_labels(path)

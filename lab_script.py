@@ -35,7 +35,7 @@ global statistics
 
 
 
-CLIENT_SECRETS_FILE = 'C:/Users/Tushar/Documents/DataOPs/client_secret_youtube.json'
+CLIENT_SECRETS_FILE = 'credentials.json'
 
 
 def get_analytics_service():
