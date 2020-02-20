@@ -223,8 +223,8 @@ def indicator(color, text, id_value):
     )
 
 
-image_filename = 'Ascibe_logo.png'
-encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+#image_filename = 'Ascibe_logo.png'
+#encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 DEBUG = True
 FRAMERATE = 24.0
