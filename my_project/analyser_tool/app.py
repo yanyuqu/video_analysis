@@ -42,7 +42,7 @@ import re
 
 from .server import app
 # statistics = {'viewCount': '8351', 'likeCount': '151', 'dislikeCount': '13', 'favoriteCount': '0', 'commentCount': '31'}
-CLIENT_SECRETS_FILE = 'client_secret_youtube.json'
+CLIENT_SECRETS_FILE = 'credentials.json'
 
 
 def get_analytics_service():
@@ -99,17 +99,21 @@ def execute_api_request(client_library_function, **kwargs):
 
 
 def analyze_labels_file(path):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "video_api.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "test_google_account.json"
     # [START video_analyze_labels]
     """Detect labels given a file path."""
     video_client = videointelligence.VideoIntelligenceServiceClient()
     features = [videointelligence.enums.Feature.LABEL_DETECTION]
 
-    with io.open(path, 'rb') as movie:
-        input_content = movie.read()
+    mode = videointelligence.enums.LabelDetectionMode.SHOT_AND_FRAME_MODE
+    config = videointelligence.types.LabelDetectionConfig(
+        label_detection_mode=mode)
+    context = videointelligence.types.VideoContext(
+        label_detection_config=config)
+
 
     operation = video_client.annotate_video(
-        features=features, input_content=input_content)
+        path, features=features, video_context=context)
     print('\nProcessing video for label annotations:')
 
     result = operation.result(timeout=90)
@@ -150,11 +154,7 @@ def analyze_labels_file(path):
 
 def analyze_videos(url):
     global statistics
-    ydl_opts = {'outtmpl': '%(id)s.%(ext)s'}
-
-    os.chdir('./')
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
+    global frame
 
     split = url.split("=")
 
@@ -174,10 +174,10 @@ def analyze_videos(url):
         metrics="audienceWatchRatio,relativeRetentionPerformance",
         dimensions='elapsedVideoTimeRatio')
 
-    path = '' + split[1] + '.mp4'
+    path = 'gs://[bucket_on_test_account]/' + split[1] + '.mp4'
 
     # Calling the analyze labels function for the video analysis. Currently shot level analysis is being done.
-    frame_shot = analyze_labels_file(path)
+    frame_shot = analyze_labels(path)
 
     # Data Procssing to map and create retention metrics associated with each label
     video_length = round(frame_shot['End'].iloc[-1])
