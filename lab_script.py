@@ -26,7 +26,6 @@ from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from google.auth.transport.requests import Request
-from google.cloud import videointelligence
 from google.cloud.videointelligence import enums
 import re
 
@@ -94,6 +93,7 @@ def execute_api_request(client_library_function, **kwargs):
 
 def analyze_labels(path):
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:/Users/Tushar/Documents/DataOPs/video_api.json"
+    from google.cloud import videointelligence
     # [START video_analyze_labels]
     """Detect labels given a file path."""
     video_client = videointelligence.VideoIntelligenceServiceClient()
