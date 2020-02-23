@@ -160,8 +160,8 @@ def analyze_videos(url):
     youtubeAnalytics = get_analytics_service()
     results = execute_api_request(
         youtubeAnalytics.reports().query,
-        ids='channel==UCuA4QDy-VPkbhkiLUclP1SA',
-        startDate='2019-04-12',
+        ids='channel==UCBKHQZ6GqOmFtnMZU4Fb-6g',
+        startDate='2017-06-24',
         endDate='2019-08-20',
         filters="video==" + split[1] + ";audienceType==ORGANIC",
         metrics="audienceWatchRatio,relativeRetentionPerformance",
