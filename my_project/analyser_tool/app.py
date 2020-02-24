@@ -98,7 +98,7 @@ def execute_api_request(client_library_function, **kwargs):
     return results
 
 
-def analyze_labels_file(path):
+def analyze_labels(path):
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "video_api.json"
     # [START video_analyze_labels]
     """Detect labels given a file path."""
