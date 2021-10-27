@@ -32,7 +32,7 @@ dash-html-components==0.14.0
 dash-player==0.0.1
 dash-renderer==0.20.0
 dash-table==3.6.0
-dask==1.2.1
+dask==2021.10.0
 datalab==1.1.5
 decorator==4.3.2
 Django==2.2.10
